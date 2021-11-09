@@ -56,6 +56,7 @@ docker_compose_image_name="${image_repository}:docker-compose"
 
 node_env_variables=" \
     NODE_REPO_COMPONENT \
+    SOVRIN_REPO_COMPONENT \
     INDY_PLENUM_VERSION \
     INDY_NODE_VERSION \
     URSA_VERSION \
@@ -154,7 +155,8 @@ docker run -t --rm \
     -e INDY_PLENUM_VERSION \
     -e INDY_NODE_VERSION \
     -e URSA_VERSION \
-    "$docker_compose_image_name" docker-compose -f system/docker/docker-compose.yml build node
+    -e SOVRIN_REPO_COMPONENT \
+    "$docker_compose_image_name" docker-compose -f system/docker/docker-compose.yml build --no-cache node
 
 
 docker images "$image_repository"

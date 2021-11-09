@@ -26,12 +26,27 @@ RUN pip3 install -U \
     setuptools
 
 # sovrin repo init
+ARG SOVRIN_REPO_COMPONENT
+RUN : ${SOVRIN_REPO_COMPONENT:?"SOVRIN_REPO_COMPONENT must be provided"}
+ENV SOVRIN_REPO_COMPONENT=${SOVRIN_REPO_COMPONENT}
+
+
+# RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CE7709D068DB5E88 \
+#     && bash -c 'echo "deb https://repo.sovrin.org/deb xenial stable" >> /etc/apt/sources.list' \
+#     & apt-get update -y
+# sovrin repo
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CE7709D068DB5E88 \
+    && echo "deb https://repo.sovrin.org/deb xenial ${SOVRIN_REPO_COMPONENT}" >> /etc/apt/sources.list \
+    && apt-get update -y
+
+# Hyperledger repo init
 ARG NODE_REPO_COMPONENT
 RUN : ${NODE_REPO_COMPONENT:?"NODE_REPO_COMPONENT must be provided"}
 ENV NODE_REPO_COMPONENT=${NODE_REPO_COMPONENT}
 
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CE7709D068DB5E88 \
-    && echo "deb https://repo.sovrin.org/deb xenial ${NODE_REPO_COMPONENT}" >> /etc/apt/sources.list \
+# Hyperledger Artifactory
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9692C00E657DDE61 \
+    && echo "deb https://hyperledger.jfrog.io/artifactory/indy xenial ${NODE_REPO_COMPONENT}" >> /etc/apt/sources.list \
     && apt-get update -y
 
 # indy depedencies

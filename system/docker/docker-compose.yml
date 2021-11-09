@@ -22,4 +22,5 @@ services:
         - PYTHON3_PYZMQ_VERSION
         - INDY_PLENUM_VERSION
         - INDY_NODE_VERSION
+        - SOVRIN_REPO_COMPONENT
     image: ${IMAGE_REPOSITORY}:node
