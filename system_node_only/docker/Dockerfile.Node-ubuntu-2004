@@ -1,0 +1,56 @@
+# This container is to run indy-node.
+# It has been created in the indy-node docker working group of the ID Union project.
+# author: Robin Klemens <klemens@intnernet-sicherheit.de>
+# version: 1.0+2021-09-02
+
+# FROM ubuntu:16.04
+# LABEL maintainer="Hyperledger <hyperledger-indy@lists.hyperledger.org>"
+
+# RUN apt-get update && apt-get dist-upgrade -y
+
+# # very common packages
+# RUN apt-get update && apt-get install -y \
+#     git \
+#     wget \
+#     vim \
+#     apt-transport-https \
+#     ca-certificates \
+#     apt-utils
+
+# # python
+# RUN apt-get update && apt-get install -y \
+#     python3.5 \
+#     python3-pip \
+#     python-setuptools
+
+# # pypi based packages
+# RUN pip3 install -U \
+#     pip==20.3.4 
+    # virtualenv==20.0.35 \
+    # "setuptools<=50.3.2"
+
+# RUN ln -s /usr/bin/pip3 /usr/bin/pip
+
+FROM ubuntu:20.04
+
+RUN apt-get update -y && apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    gnupg2
+
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CE7709D068DB5E88
+RUN bash -c 'echo "deb https://repo.sovrin.org/deb bionic stable" >> /etc/apt/sources.list'
+
+# Hyperledger Artifactory
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 9692C00E657DDE61 \
+    && echo "deb https://hyperledger.jfrog.io/artifactory/indy focal dev" >> /etc/apt/sources.list
+
+
+RUN apt-get update -y && apt-get install -y \
+    # indy-node="1.13.0~dev189" \
+    indy-plenum="1.13.0~dev168" \
+    && rm -rf /var/lib/apt/lists/*
+
+# # RUN apt-get update -y && apt-get install -y \
+# #     python3-importlib-metadata \
+# #     && rm -rf /var/lib/apt/lists/*

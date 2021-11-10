@@ -1,0 +1,26 @@
+version: "3.4"
+
+services:
+  client:
+    build:
+      context: ./client
+      args:
+        - PYTHON3_VERSION
+        - CLIENT_REPO_COMPONENT
+        - LIBINDY_VERSION
+        - u_id
+        - DIND_CONTAINER_REGISTRY
+        - DIND_IMAGE_NAME
+    image: ${IMAGE_REPOSITORY}:client
+
+  node:
+    build:
+      context: ./node
+      args:
+        - NODE_REPO_COMPONENT
+        - URSA_VERSION
+        - PYTHON3_PYZMQ_VERSION
+        - INDY_PLENUM_VERSION
+        - INDY_NODE_VERSION
+        - SOVRIN_REPO_COMPONENT
+    image: ${IMAGE_REPOSITORY}:node
