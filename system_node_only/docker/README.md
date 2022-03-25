@@ -102,7 +102,7 @@ Run some test target with specific pytest arguments
 UBUNTU_VERSION="ubuntu-1604" ./run.sh system_node_only/indy-node-tests/test_ledger.py "-l -v --junit-xml=test_ledger-report.xml -k test_send_and_get_nym_positive"
 
 ### Ubuntu 20.04
-UBUNTU_VERSION="ubuntu-2004" ./run.sh system_node_only/indy-node-tests/test_ledger.py "-l -v --junit-xml=test_ledger-report.xml -k test_send_and_get_nym_positive"
+UBUNTU_VERSION="ubuntu-2004" ./run.sh system_node_only/indy-node-tests/test_ledger.py "-l -v --junit-xml=test_ledger-report.xml --log-cli-level 0"
 ```
 
 Run with live logs enabled (please check [pytest docs](https://docs.pytest.org/en/3.6.4/logging.html) for more info)

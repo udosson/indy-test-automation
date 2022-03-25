@@ -1,5 +1,9 @@
-FROM jrei/systemd-ubuntu:20.04
+#FROM jrei/systemd-ubuntu:20.04
 # 
+# FROM systemd-ubuntu-20.04:latest
+FROM fauust/docker-systemd:ubuntu-20.04
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 ARG uid=1000
 ARG user=indy
