@@ -86,13 +86,17 @@ docker build -t teracy/ubuntu:20.04-dind-latest --build-arg UBUNTU_VERSION=20.04
 DIND_CONTAINER_REGISTRY=teracy DIND_IMAGE_NAME=ubuntu:16.04-dind-latest CLIENT_SOVRIN_REPO_COMPONENT=master NODE_REPO_COMPONENT=main NODE_SOVRIN_REPO_COMPONENT=master INDY_NODE_VERSION="1.13.0~dev197" INDY_PLENUM_VERSION="1.13.0~dev169" URSA_VERSION="0.3.2-2" PYTHON3_PYZMQ_VERSION="18.1.0" LIBINDY_VERSION="1.15.0~1625-xenial" UBUNTU_VERSION="ubuntu-1604" ./prepare.sh
 
 ### Ubuntu 20.04
-DIND_CONTAINER_REGISTRY=teracy DIND_IMAGE_NAME=ubuntu:20.04-dind-latest CLIENT_SOVRIN_REPO_COMPONENT=master NODE_REPO_COMPONENT=dev NODE_SOVRIN_REPO_COMPONENT=master INDY_NODE_VERSION="1.13.0~dev206" INDY_PLENUM_VERSION="1.13.0~dev175" LIBINDY_VERSION="1.15.0~1625-bionic" URSA_VERSION="0.3.2-1" PYTHON3_PYZMQ_VERSION="18.1.0" UBUNTU_VERSION="ubuntu-2004" ./prepare.sh
+DIND_CONTAINER_REGISTRY=teracy DIND_IMAGE_NAME=ubuntu:20.04-dind-latest CLIENT_SOVRIN_REPO_COMPONENT=master NODE_REPO_COMPONENT=dev NODE_SOVRIN_REPO_COMPONENT=master INDY_NODE_VERSION="1.13.0~dev5" INDY_PLENUM_VERSION="1.13.0~dev175" LIBINDY_VERSION="1.15.0~1625-bionic" URSA_VERSION="0.3.2-1" PYTHON3_PYZMQ_VERSION="18.1.0" UBUNTU_VERSION="ubuntu-2004" ./prepare.sh
 ```
 
 Collect tests for some test target
 
 ```bash
-./run.sh system/indy-node-tests --collect-only
+### Ubuntu 16.04
+UBUNTU_VERSION="ubuntu-1604" ./run.sh system/indy-node-tests --collect-only
+
+### Ubuntu 20.04
+UBUNTU_VERSION="ubuntu-2004" ./run.sh system/indy-node-tests --collect-only
 ```
 
 Run some test target with specific pytest arguments
